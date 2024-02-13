@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Home</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Ensure the body takes up the full viewport height */
+        }
+
+        .bottom-element {
+            bottom: 0; /* Position at the bottom of the viewport */
+            height: 80vh; /* 95% of the viewport height */
+            width: 100%; /* Full width */
+        }
+    </style>
+
+    <script>
+        function checkFileType() {
+            // Get the input element
+            var inputElement = document.getElementById('fileInput');
+
+            // Check if files are selected
+            if (inputElement.files.length > 0) {
+                // Get the first file
+                var file = inputElement.files[0];
+
+                // Check file extension or MIME type
+                var allowedExtensions = ['mp3', 'wav', 'ogg']; // Add more if needed
+                var fileExtension = file.name.split('.').pop().toLowerCase();
+                var validMimeTypes = ['audio/mpeg', 'audio/wav', 'audio/ogg']; // Add more if needed
+
+                if (allowedExtensions.includes(fileExtension) || validMimeTypes.includes(file.type)) {
+                    alert('Selected file is an audio file.');
+                } else {
+                    alert('Selected file is not an audio file.');
+                    // Optionally clear the file input
+                    inputElement.value = '';
+                }
+            }
+        }
+    </script>
+
+  </head>
+  <body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent mb-5">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'home:home_view' %}">REGINA EKWERE</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home:home_view' %}">Home</a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">View Students</a>
+                  </li> -->
+                </ul>
+              </div>
+            </div>
+        </nav>
+
+        <div class="content bottom-element d-flex justify-content-center align-items-center">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleFormControlFile1">Audio File</label>
+                  <input type="file" name="audio" class="form-control-file form-control-lg" id="fileInput" onchange="checkFileType()" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
