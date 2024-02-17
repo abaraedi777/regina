@@ -18,9 +18,11 @@ class HomeView(View):
         if prediction == 0:
             context["pred"] = "ANGRY"
         elif prediction == 1:
-            context["pred"] = "HAPPY"
-        elif prediction == 1:
-            context["pred"] = "SAD"
+            context["pred"] = "CALM"
+        # elif prediction == 2:
+        #     context["pred"] = "SAD"
+        else:
+            context["pred"] = "CANNOT PROCESS UPLOADED FILE"
 
         print(context)
         
